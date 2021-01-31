@@ -3,6 +3,7 @@ import os
 
 from flask import Flask, render_template, request, redirect, session, url_for
 from flask_cors import CORS
+from werkzeug.exceptions import HTTPException
 
 from backend import request_functions
 from backend import spotify_user_auth
@@ -43,6 +44,20 @@ def playlist_creation():
     complete_playlist_data = request_functions.get_complete_playlist(session['auth_header'], [pump_level, bpm])
     return render_template('final.html')
 
+@app.errorhandler(HTTPException)
+def handle_exception(e):
+    """Return JSON instead of HTML for HTTP errors."""
+    # start with the correct headers and status code from the error
+    print(e)
+    response = e.get_response()
+    # replace the body with JSON
+    response.data = json.dumps({
+        "code": e.code,
+        "name": e.name,
+        "description": e.description,
+    })
+    response.content_type = "application/json"
+    return render_template("error.html", info=e)
 
 if __name__ == '__main__':
     os.chdir(os.path.dirname(os.path.abspath(__file__)))

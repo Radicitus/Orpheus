@@ -13,6 +13,8 @@ TARGET_TEMPO = {'target_tempo': 152}
 API_VERSION = "v1/"
 SPOTIFY_API_URL = "https://api.spotify.com/"+API_VERSION
 EMBED_BASE_URL = "https://open.spotify.com/embed/playlist/"
+
+
 '''
     Helper
 '''
