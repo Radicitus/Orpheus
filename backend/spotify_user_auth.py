@@ -54,7 +54,7 @@ def authorize(auth_token, scopes=[]):
         "redirect_uri": REDIRECT_URI
     }
     if scopes != []:
-        code_payload['scope'] = urllibparse.urlencode(scopes)
+        code_payload['scope'] = ' '.join(scopes)
 
     base64encoded = base64.b64encode(("{}:{}".format(CLIENT_ID, CLIENT_SECRET)).encode())
     headers = {"Authorization": "Basic {}".format(base64encoded.decode())}
