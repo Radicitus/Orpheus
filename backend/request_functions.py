@@ -21,11 +21,50 @@ REC_URL_FRAG = "recommendations?"
 TARGET_TEMPO = {'target_tempo': 152}
 
 USER_READ_PRIVATE = "user-read-private"
-PLAYLIST_MODIFY_PUBLIC = "playlist-modify-public"
 
 '''
+    Helper
+'''
+
+def get_personalized_data(auth_token, mode, option):
+    auth_header = spotify_user_auth.authorize(auth_token)
+    url = ''.join([SPOTIFY_API_URL,f'me/top/{option}/'])
+    response = requests.get(url, headers=auth_header)
+    return response.json()
 
 '''
+    Get top Tracks
+'''
+
+def get_top_tracks_id(auth_token,mode):
+    track_id_data = get_personalized_data(auth_token, mode, 'tracks')['items']
+    all_track_id = []
+    for i in track_id_data:
+        all_track_id.append(i['id'])
+    return all_track_id
+'''
+    Get top Artists
+'''
+
+def get_top_artist_id(auth_token,mode):
+    artist_id_data = get_personalized_data(auth_token, mode, 'artists')
+    all_artist_id = []
+    for i in artist_id_data['items']:
+        all_artist_id.append(i['id'])
+    return all_artist_id
+
+'''
+    Get Top Genres
+'''
+
+def get_top_genres(auth_token,mode):
+    genre_data = get_personalized_data(auth_token, mode, 'artists')
+    all_genres = []
+    for i in genre_data['items']:
+        all_genres.extend(i['genres'])
+    genre_set = set(all_genres)
+    top_5 = sorted(genre_set, key=lambda x: all_genres.count(x), reverse=True)[0:5]
+    return top_5
 
 '''
     Get Recommendations
