@@ -1,0 +1,129 @@
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: black;
+    color: white;
+    text-align: center;
+    align-content: center;
+}
+
+
+#title {
+    font-size: 10vmax;
+    width: 48vw;
+    margin: 75px auto 0 auto;
+    background: -webkit-linear-gradient(45deg, #00EEE0, #04A6EC);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#catchphrase {
+    font-size: 3vw;
+    width: fit-content;
+    margin: auto;
+}
+
+div p {
+    font-size: 4vw;
+    font-weight: lighter;
+}
+
+#pumped_radio {
+    border: .2vmin solid white;
+    border-radius: 2vmin;
+    width: 40vw;
+    height: 50%;
+    margin: 3vh auto;
+    background-color: rgba(255, 255, 255, .3);
+    padding: 3vh 0;
+}
+
+.btn {
+    background-color: #b5b5b5;
+    color: black;
+    font-size: 3vw;
+    border-radius: 2vmin;
+    width: 80%;
+    padding: 1.25vh 0;
+    margin: 2vmin 0;
+}
+
+/*form#selection_form div#bpm_selector button#bpm_minus {*/
+/*    color:red;*/
+/*    width: 100%;*/
+/*}*/
+
+.btn-check:checked+.btn-secondary {
+    background-color: white;
+    color: black;
+    box-shadow: 0 4px 4px black;
+}
+
+#bpm_selector {
+    background-color: white;
+    color: black;
+    width: 30%;
+    margin: 5vh auto;
+    padding: 1.25vh;
+    border-radius: 2vmin;
+    font-size: 3vw;
+}
+
+#bpm_selector span {
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+#bpm_selector input:hover {
+    color: #70d3ff;
+}
+
+#bpm_selector #bpm_minus {
+    background-color: #EA6161;
+}
+
+#bpm_selector #bpm_plus {
+    background-color: #32ACFD;
+}
+
+#bpm_selector button {
+    border: none;
+}
+
+#bpm {
+    border: none;
+    width: 6vw;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    text-align: center;
+}
+
+.circle {
+    border-radius: 100%;
+    padding: 0;
+    border: solid black 1px;
+    /*margin: auto;*/
+    height: 3vw;
+    width: 3vw;
+    font-size: 1.5vw;
+    vertical-align: middle;
+}
+
+.submit {
+    background: -webkit-linear-gradient(45deg, #00EEE0, #04A6EC);
+    color: white;
+    border: 0;
+    border-radius: 1.5vmin;
+    width: 20%;
+    padding: 1vh;
+    margin-bottom: 3vh;
+    font-size: 2.5vw;
+    box-shadow: 0 0 .25em 0 white;
+    transition: width .25s, padding .25s, box-shadow .75s;
+}
+
+.submit:hover {
+    width: 21%;
+    padding: 1.1vh;
+    box-shadow: 0 0 2em 0 white;
+}

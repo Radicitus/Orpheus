@@ -1,13 +1,54 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Test</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Stylesheets -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="../static/styles.css">
+    <link rel="script" href="../static/scripts.js">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <title>Orpheus</title>
 </head>
 <body>
-    <a href="/auth">Go to User Auth</a>
-    <a href="/complete/1">Get Playlist (after Auth)</a>
+    <h1 id="title">Orpheus</h1>
+    <p id="catchphrase">Find songs <strong>fit</strong> for your routine.</p>
 
+    <form action="/selections" method="post">
+        <div id="pumped_radio">
+            <p>How pumped?</p>
+            <div>
+                <input class="btn-check" type="radio" id="pumped_4" name="pumped" value="4"><label class="btn btn-secondary" for="pumped_4">Pumped as hell!</label>
+            </div>
+            <div>
+                <input class="btn-check" type="radio" id="pumped_3" name="pumped" value="3"><label class="btn btn-secondary" for="pumped_3">Pretty pumped</label>
+            </div>
+            <div>
+                <input class="btn-check" type="radio" id="pumped_2" name="pumped" value="2"><label class="btn btn-secondary" for="pumped_2">Bicycle Pump</label>
+            </div>
+            <div>
+                <input class="btn-check" type="radio" id="pumped_1" name="pumped" value="1" checked><label class="btn btn-secondary" for="pumped_1">Just Chilling</label>
+            </div>
+        </div>
+
+        <div id="bpm_selector">
+            <span>BPM:</span>
+            <button type="button" class="circle btn btn-primary" id="bpm_minus" onclick="decreaseBPM()">-</button>
+            <input type="text" id="bpm" name="bpm" value="100" inputmode="numeric" pattern="[0-9]*"><label for="bpm"></label>
+            <button type="button" class="circle btn btn-primary" id="bpm_plus" onclick="increaseBPM()">+</button>
+        </div>
+
+        <button class="submit">Let's go!</button>
+    </form>
+
+    <script type="text/javascript" src="../static/scripts.js"></script>
 </body>
 </html>

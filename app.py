@@ -25,6 +25,13 @@ def callback():
     return redirect(url_for('index'))
 
 
+@app.route('/selections', methods=['POST'])
+def save_selections():
+    response = request.form
+    print(response['pumped'])
+    return 'OK'
+
+  
 @app.route('/complete/<mode>')
 def complete_playlist(mode):
     complete_playlist_data = request_functions.get_complete_playlist(session['auth_header'], mode)
