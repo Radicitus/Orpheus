@@ -11,19 +11,29 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="../static/styles-final.css">
-    <link rel="script" href="../static/scripts.js">
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+    <script src="https://kit.fontawesome.com/e0cdac7ea9.js" crossorigin="anonymous"></script>
+
     <title>Orpheus</title>
 </head>
 <body>
-    <h1>Orpheus</h1>
-    <p>
-        This is the playlist we feel <br> is the best <strong>fit</strong> for the activities <br> you're aiming to do:
-    </p>
-
+<a href="http://localhost:5000"><h1>Orpheus</h1></a>
+<!--    <span id="github">-->
+<!--        <a href="https://github.com/Radicitus/HackUCI-2021">-->
+<!--            <i class="fab fa-github"></i>-->
+<!--            <p>See it on GitHub!</p>-->
+<!--        </a>-->
+<!--    </span>-->
+    <div id="intro">
+        This is the playlist we feel <br> is the best <strong>fit</strong> for the activities <br> you're aiming to do: <br>
+        <a href="{{ playlist_data[2]['external_urls']['spotify'] }}"><button id="spotify-open">Open in Spotify</button></a>
+    </div>
+    <div id="spotify-embed">
+        <iframe src="{{ playlist_data[1] }}" width="350" height="300" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+    </div>
     <footer>
         Made with love at HackUCI 2021 <3
     </footer>

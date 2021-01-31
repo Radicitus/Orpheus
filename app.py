@@ -41,7 +41,7 @@ def playlist_creation():
     pump_level = session['selections']['pumped']
     bpm = session['selections']['bpm']
     complete_playlist_data = request_functions.get_complete_playlist(session['auth_header'], [pump_level, bpm])
-    return render_template('final.html')
+    return render_template('final.html', playlist_data=complete_playlist_data)
 
 
 if __name__ == '__main__':
