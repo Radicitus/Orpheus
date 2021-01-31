@@ -31,9 +31,9 @@ PLAYLIST_MODIFY_PUBLIC = "playlist-modify-public"
     Get Recommendations
 '''
 
-def get_recommendations(auth_token, mode, genre_list):
+def get_recommendations(auth_header, mode, genre_list):
 
-    auth_header = spotify_user_auth.authorize(auth_token)
+    auth_header = auth_header
     genre_string = ','.join(genre_list)
     genre_param = quote(genre_string)
 
@@ -54,8 +54,8 @@ def get_recommendations(auth_token, mode, genre_list):
 '''
     GET - Get User Information
 '''
-def get_user_info(auth_token):
-    auth_header = spotify_user_auth.authorize(auth_token, [USER_READ_PRIVATE])
+def get_user_info(auth_header):
+    auth_header = auth_header
 
     url = ''.join([SPOTIFY_API_URL, 'me'])
     print(url)
@@ -67,14 +67,14 @@ def get_user_info(auth_token):
 '''
     POST - Create Playlist
 '''
-def create_playlist(auth_token, user_id):
-    auth_header = spotify_user_auth.authorize(auth_token, [PLAYLIST_MODIFY_PUBLIC])
-    body = {
+def create_playlist(auth_header, user_id):
+    auth_header = auth_header
+    body = json.dumps({
         "name": "very cool music i promise",
         "description": "read the title",
         "public": True
-        }
-    url = ''.join([SPOTIFY_API_URL,'users/',user_id,'/playlists'])
+        })
+    url = ''.join([SPOTIFY_API_URL, 'users/', user_id, '/playlists'])
     print(url)
     response = requests.get(url, headers=auth_header)
     return response.json()
@@ -83,8 +83,8 @@ def create_playlist(auth_token, user_id):
 '''
     POST - Add Recommendations to Playlist
 '''
-def add_to_playlist(auth_token, rec_list, playlist_id):
-    auth_header = spotify_user_auth.authorize(auth_token, [PLAYLIST_MODIFY_PUBLIC])
+def add_to_playlist(auth_header, rec_list, playlist_id):
+    auth_header = spotify_user_auth.authorize(auth_header, [PLAYLIST_MODIFY_PUBLIC])
 
 
 
