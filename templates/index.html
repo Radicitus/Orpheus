@@ -22,7 +22,7 @@
     <h1 id="title">Orpheus</h1>
     <p id="catchphrase">Find songs <strong>fit</strong> for your routine.</p>
 
-    <form action="/selections" method="post">
+    <form id="selection_form" action="/selections" method="post">
         <div id="pumped_radio">
             <p>How pumped?</p>
             <div>
@@ -41,9 +41,9 @@
 
         <div id="bpm_selector">
             <span>BPM:</span>
-            <button type="button" onClick="onClickDecBPM()" class="circle btn btn-primary" id="bpm_minus">-</button>
+            <button type="button" onClick="onClickDecBPM()" class="circle btn btn-primary btn-bpm" id="bpm_minus">-</button>
             <span id="bpm_val">152</span>
-            <button type="button" onClick="onClickIncBPM()" class="circle btn btn-primary" id="bpm_plus">+</button>
+            <button type="button" onClick="onClickIncBPM()" class="circle btn btn-primary btn-bpm" id="bpm_plus">+</button>
         </div>
 
         <button class="submit">Let's go!</button>
