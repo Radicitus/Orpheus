@@ -6,9 +6,9 @@
 </head>
 <body>
     {% for track in recs %}
-        <h4><b>{{ track['name'] }}</b></h4>
+        <h3><b>{{ track['name'] }}</b></h3>
         {% for art_list in track['artists'] %}
-            <h5>{{ art_list['artist'] }}</h5>
+            <h5>{{ art_list['name'] }}</h5>
         {% endfor %}
     {% endfor %}
 </body>
