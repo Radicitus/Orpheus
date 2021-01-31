@@ -1,0 +1,58 @@
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: black;
+    color: white;
+    text-align: center;
+    align-content: center;
+}
+
+
+#title {
+    font-size: 10vmax;
+    width: 48vw;
+    margin: 75px auto 0 auto;
+    background: -webkit-linear-gradient(45deg, #00EEE0, #04A6EC);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#catchphrase {
+    font-size: 3vw;
+    width: fit-content;
+    margin: auto;
+}
+
+div p {
+    font-size: 4vw;
+    font-weight: lighter;
+}
+
+#pumped_radio {
+    border: .2vmin solid white;
+    border-radius: 2vmin;
+    width: 40vw;
+    height: 50%;
+    margin: 3vh auto;
+    background-color: rgba(255, 255, 255, .3);
+    padding: 3vh 0;
+}
+
+.btn {
+    background-color: #b5b5b5;
+    color: black;
+    font-size: 3vw;
+    border-radius: 2vmin;
+    width: 80%;
+    padding: 1.25vh 0;
+    margin: 2vmin 0;
+}
+
+.btn-check:checked+.btn-secondary {
+    background-color: white;
+    color: black;
+    box-shadow: 0 4px 4px black;
+}
+
+#bpm_selector {
+
+}
