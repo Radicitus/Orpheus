@@ -25,14 +25,32 @@ def callback():
     return redirect(url_for('index'))
 
 
+@app.route('/top/tracks/<mode>')
+def top_tracks(mode):
+    track_data = request_functions.get_top_tracks_id(session['auth_header'], mode)
+    return
+@app.route('/top/genres/<mode>')
+def top_genres(mode):
+    genre_data = request_functions.get_top_genres(session['auth_header'], mode)
+    # artist_data = request_functions.get_top_artist_id(session['user_auth'], mode)
+    return genre_data
 
-
-
+@app.route('/top/artists/<mode>')
+def top_artists(mode):
+    top_artists = request_functions.get_top_artist_id(session['auth_header'], mode)
+    return top_artists
 
 @app.route('/recs/<mode>')
 def hardcode_get_recs(mode):
-    recs_data = request_functions.get_recommendations(session['auth_header'], mode, ['classical', 'jazz','funk'])
-    session['recs_data'] = recs_data['tracks'] #this is only done for testing, real pipeline will be all backend
+    top_tracks = request_functions.get_top_tracks_id(session['auth_header'], mode)
+    top_artists = request_functions.get_top_artist_id(session['auth_header'], mode)
+    top_genres = request_functions.get_top_genres(session['auth_header'], mode)
+
+    print(f'showing top_artists {top_artists}')
+    print(f'showing top tracks{top_tracks}')
+    print(f'showing top genres {top_genres}')
+
+    recs_data = request_functions.get_recommendations(session['auth_header'], mode, top_artists, top_genres, top_tracks)
     return render_template('rec_list_test.html', recs=recs_data['tracks'])
 
 
