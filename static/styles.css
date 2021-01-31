@@ -67,6 +67,10 @@ div p {
     margin-right: 3%;
 }
 
+#bpm_selector input:hover {
+    color: #70d3ff;
+}
+
 #bpm {
     border: none;
     width: 5vw;

@@ -41,13 +41,15 @@
 
         <div id="bpm_selector">
             <span>BPM:</span>
-            <button class="circle btn btn-primary" id="bpm_minus">-</button>
+            <button type="button" class="circle btn btn-primary" id="bpm_minus" onclick="decreaseBPM()">-</button>
             <input type="text" id="bpm" name="bpm" value="100" inputmode="numeric" pattern="[0-9]*"><label for="bpm"></label>
-            <button class="circle btn btn-primary" id="bpm_plus">+</button>
+            <button type="button" class="circle btn btn-primary" id="bpm_plus" onclick="increaseBPM()">+</button>
         </div>
 
         <button class="submit">Let's go!</button>
     </form>
 
+    <script type="text/javascript" src="../static/scripts.js"></script>
+</body>
 </body>
 </html>
