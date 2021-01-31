@@ -24,6 +24,13 @@ def callback():
     return redirect(url_for('index'))
 
 
+@app.route('/selections', methods=['POST'])
+def save_selections():
+    response = request.form
+    print(response['pumped'])
+    return 'OK'
+
+
 if __name__ == '__main__':
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
     credentials = json.load(open("credentials/credentials.txt", 'r+'))
