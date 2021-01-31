@@ -29,7 +29,7 @@ def callback():
 def complete_playlist(mode):
     complete_playlist_data = request_functions.get_complete_playlist(session['auth_header'], mode)
     print(complete_playlist_data)
-    return render_template('complete_test.html')
+    return render_template('complete_test.html', playlist=complete_playlist_data)
 
 
 if __name__ == '__main__':

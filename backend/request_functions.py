@@ -187,7 +187,7 @@ def get_complete_playlist(auth_header, mode):
     finished_playlist_data = add_to_playlist(auth_header, rec_data['tracks'], playlist_data.json()['id'])
 
 
-    return str(playlist_data.json())
+    return playlist_data.json()
 
 
 def build_playlist():
