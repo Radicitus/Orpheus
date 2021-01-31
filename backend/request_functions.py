@@ -123,7 +123,7 @@ def create_playlist(auth_header, user_id):
     POST - Add Recommendations to Playlist
 '''
 def add_to_playlist(auth_header, rec_list, playlist_id):
-    auth_header = spotify_user_auth.authorize(auth_header, [PLAYLIST_MODIFY_PUBLIC])
+    auth_header = spotify_user_auth.authorize(auth_header)
 
 
 
