@@ -21,6 +21,7 @@ def auth():
 def callback():
     auth_token = request.args['code']
     session['user_auth'] = auth_token
+    session['auth_header'] = spotify_user_auth.authorize(auth_token)
     return redirect(url_for('index'))
 
 
@@ -30,13 +31,26 @@ def callback():
 
 @app.route('/recs/<mode>')
 def hardcode_get_recs(mode):
-    recs_data = request_functions.get_recommendations(session['user_auth'], mode, ['classical', 'jazz','funk'])
+    recs_data = request_functions.get_recommendations(session['auth_header'], mode, ['classical', 'jazz','funk'])
     return render_template('rec_list_test.html', recs=recs_data['tracks'])
 
-@app.route('/user')
+
+@app.route('/createPlaylist/' , methods=['POST', 'GET'])
+def create_playlist():
+    #user_data = request_functions.get_user_info(session['user_auth'])
+    print('createPlaylist')
+    playlist_data = request_functions.create_playlist(session['auth_header'], session['user_data']['id'])
+    return "heh"
+
+
+@app.route('/user/')
 def get_user():
-    user_data = request_functions.get_user_info(session['user_auth'])
+    user_data = request_functions.get_user_info(session['auth_header'])
+    session['user_data'] = user_data
     return render_template('get_user_test.html', user=user_data)
+
+
+
 
 if __name__ == '__main__':
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
