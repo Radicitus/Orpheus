@@ -13,7 +13,7 @@ body {
 #title {
     font-size: 10vmax;
     width: 48vw;
-    margin: 75px auto 0 auto;
+    margin: 2% auto 0 auto;
     background: -webkit-linear-gradient(45deg, #00EEE0, #04A6EC);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -63,7 +63,7 @@ div p {
     background-color: white;
     color: black;
     width: 30%;
-    margin: 5vh auto;
+    margin: 3vh auto;
     padding: 1.25vh;
     border-radius: 2vmin;
     font-size: 3vw;
@@ -117,7 +117,7 @@ div p {
     border-radius: 1.5vmin;
     width: 20%;
     padding: 1vh;
-    margin-bottom: 3vh;
+    margin-bottom: 2vh;
     font-size: 2.5vw;
     box-shadow: 0 0 .25em 0 white;
     transition: width .25s, padding .25s, box-shadow .75s;
