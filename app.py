@@ -32,16 +32,25 @@ def callback():
 @app.route('/recs/<mode>')
 def hardcode_get_recs(mode):
     recs_data = request_functions.get_recommendations(session['auth_header'], mode, ['classical', 'jazz','funk'])
+    session['recs_data'] = recs_data['tracks'] #this is only done for testing, real pipeline will be all backend
     return render_template('rec_list_test.html', recs=recs_data['tracks'])
 
 
-@app.route('/createPlaylist/' , methods=['POST', 'GET'])
+@app.route('/createPlaylist/', methods=['POST', 'GET'])
 def create_playlist():
     #user_data = request_functions.get_user_info(session['user_auth'])
     print('createPlaylist')
     playlist_data = request_functions.create_playlist(session['auth_header'], session['user_data']['id'])
+    session['playlist_data'] = playlist_data.json()
     return "heh"
 
+@app.route('/addToPlaylist/', methods=['POST', 'GET'])
+def add_to_playlist():
+    print('addToPlaylist')
+    playlist_data = request_functions.add_to_playlist(session['auth_header'],
+                                                      session['playlist_data'],
+                                                      session['recs_data'])
+    return "added songs hell yeah"
 
 @app.route('/user/')
 def get_user():
