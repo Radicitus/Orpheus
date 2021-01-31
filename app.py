@@ -33,6 +33,11 @@ def hardcode_get_recs(mode):
     recs_data = request_functions.get_recommendations(session['user_auth'], mode, ['classical', 'jazz','funk'])
     return render_template('rec_list_test.html', recs=recs_data['tracks'])
 
+@app.route('/user')
+def get_user():
+    user_data = request_functions.get_user_info(session['user_auth'])
+    return render_template('get_user_test.html', user=user_data)
+
 if __name__ == '__main__':
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
     credentials = json.load(open("credentials/credentials.txt", 'r+'))
