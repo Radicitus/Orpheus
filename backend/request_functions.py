@@ -12,12 +12,12 @@ REC_URL_FRAG = "recommendations?"
 TARGET_TEMPO = {'target_tempo': 152}
 API_VERSION = "v1/"
 SPOTIFY_API_URL = "https://api.spotify.com/"+API_VERSION
-
+EMBED_BASE_URL = "https://open.spotify.com/embed/playlist/"
 '''
     Helper
 '''
 
-def get_personalized_data(auth_header, mode, option):
+def get_personalized_data(auth_header, option):
     # auth_header = spotify_user_auth.authorize(auth_header)
     url = ''.join([SPOTIFY_API_URL,f'me/top/{option}/'])
     response = requests.get(url, headers=auth_header)
@@ -27,8 +27,8 @@ def get_personalized_data(auth_header, mode, option):
     Get top Tracks - 2 tracks
 '''
 
-def get_top_tracks_id(auth_header,mode):
-    track_id_data = get_personalized_data(auth_header, mode, 'tracks')['items']
+def get_top_tracks_id(auth_header):
+    track_id_data = get_personalized_data(auth_header, 'tracks')['items']
     all_track_id = []
     for i in track_id_data:
         all_track_id.append(i['id'])
@@ -39,8 +39,8 @@ def get_top_tracks_id(auth_header,mode):
     Get top Artists - just one
 '''
 
-def get_top_artist_id_and_genres(auth_header,mode):
-    artist_id_data = get_personalized_data(auth_header, mode, 'artists')
+def get_top_artist_id_and_genres(auth_header):
+    artist_id_data = get_personalized_data(auth_header, 'artists')
     all_artist_id = []
     all_genres = []
     for i in artist_id_data['items']:
@@ -56,7 +56,7 @@ def get_top_artist_id_and_genres(auth_header,mode):
     Get Top Genres - 2 genres (This is commented out to save API calls)
 '''
 
-# def get_top_genres(auth_header,mode):
+# def get_top_genres(auth_header):
 #     genre_data = get_personalized_data(auth_header, mode, 'artists')
 #     all_genres = []
 #     for i in genre_data['items']:
@@ -79,9 +79,10 @@ def get_recommendations(auth_header, mode, artist_list, genre_list, track_list):
     artist_url = urlencode({'seed_artists': artist_list})
     genre_url = urlencode({'seed_genres': genre_string})
     track_url = urlencode({'seed_tracks': track_list})
-    tempo_url = urlencode(TARGET_TEMPO) #update this at some point to incorporate mode
+    tempo_url = urlencode({'target_tempo': mode[1]}) #update this at some point to incorporate mode
+    energy_url = urlencode({'target_energy': (mode[0]/4.0)})
     limit_url = urlencode(REC_LIMIT)
-    query = '&'.join([limit_url, artist_url, genre_url, track_url, tempo_url])
+    query = '&'.join([limit_url, artist_url, genre_url, track_url, tempo_url,energy_url])
     url = ''.join([SPOTIFY_API_URL, REC_URL_FRAG, query])
     print(url)
     print(auth_header)
@@ -139,6 +140,14 @@ def add_to_playlist(auth_header, rec_list, playlist_id):
     print(response.json())
     return response
 
+'''
+    Gets playlist cover
+'''
+def get_playlist_cover(auth_header, playlist_id):
+
+    url = ''.join([SPOTIFY_API_URL, 'playlists/', playlist_id, '/images'])
+    playlist_cover_data = requests.get(url, headers=auth_header)
+    return playlist_cover_data
 
 '''
     This calls many of the methods above.
@@ -146,10 +155,10 @@ def add_to_playlist(auth_header, rec_list, playlist_id):
 def get_complete_playlist(auth_header, mode):
 
     #Retrieve the user's top artists, genres, and tracks
-    artist_and_genre = get_top_artist_id_and_genres(auth_header, mode)
+    artist_and_genre = get_top_artist_id_and_genres(auth_header)
     artist_list = artist_and_genre[0]
     genre_list = artist_and_genre[1]
-    track_list = get_top_tracks_id(auth_header, mode)
+    track_list = get_top_tracks_id(auth_header)
 
     #Get recommended songs based on the above lists
     rec_data = get_recommendations(auth_header, mode, artist_list, genre_list, track_list)
@@ -160,8 +169,15 @@ def get_complete_playlist(auth_header, mode):
     #Create a playlist for user
     playlist_data = create_playlist(auth_header, user['id'])
 
+    playlist_id = playlist_data.json()['id']
     #Add recommended songs to playlist
-    finished_playlist_data = add_to_playlist(auth_header, rec_data['tracks'], playlist_data.json()['id'])
+    finished_playlist_response = add_to_playlist(auth_header, rec_data['tracks'], playlist_id)
+
+    #Get playlist cover
+    playlist_cover_data = get_playlist_cover(auth_header, playlist_id)
 
 
-    return playlist_data.json()
+    #Group together playlist data (cover, id(used for embed), other info)
+    completed_playlist_data = [playlist_cover_data.json(), EMBED_BASE_URL+playlist_id, playlist_data.json()]
+    print(playlist_data.json())
+    return completed_playlist_data
