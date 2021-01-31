@@ -28,9 +28,9 @@ def callback():
 
 
 
-@app.route('/recs/')
-def hardcode_get_recs():
-    recs_data = request_functions.get_recommendations(session['user_auth'], ['classical', 'jazz','funk'])
+@app.route('/recs/<mode>')
+def hardcode_get_recs(mode):
+    recs_data = request_functions.get_recommendations(session['user_auth'], mode, ['classical', 'jazz','funk'])
     return render_template('rec_list_test.html', recs=recs_data['tracks'])
 
 if __name__ == '__main__':
