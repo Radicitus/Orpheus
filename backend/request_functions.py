@@ -109,8 +109,8 @@ def get_user_info(auth_header):
 def create_playlist(auth_header, user_id):
     auth_header = auth_header
     body = json.dumps({
-        "name": "very cool music i super promise",
-        "description": "read the title",
+        "name": "Fitting Jams",
+        "description": "Have fun!",
         "public": True
         })
     url = ''.join([SPOTIFY_API_URL, 'users/', user_id, '/playlists'])
