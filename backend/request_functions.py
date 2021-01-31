@@ -3,15 +3,6 @@ import requests
 from urllib.parse import urlencode, quote
 
 from backend import spotify_user_auth
-API_VERSION = "v1/"
-SPOTIFY_API_URL = "https://api.spotify.com/"+API_VERSION
-
-with open("../credentials/credentials.txt", "r") as f:
-    credentials = json.load(f)
-
-SPOTIFY_AUTH_BASE_URL = "https://accounts.spotify.com/{}"
-SPOTIFY_AUTH_URL = SPOTIFY_AUTH_BASE_URL.format('authorize')
-SPOTIFY_TOKEN_URL = SPOTIFY_AUTH_BASE_URL.format('api/token')
 
 '''
     Common Parameters
@@ -19,8 +10,8 @@ SPOTIFY_TOKEN_URL = SPOTIFY_AUTH_BASE_URL.format('api/token')
 REC_LIMIT = {'limit': 30}
 REC_URL_FRAG = "recommendations?"
 TARGET_TEMPO = {'target_tempo': 152}
-
-USER_READ_PRIVATE = "user-read-private"
+API_VERSION = "v1/"
+SPOTIFY_API_URL = "https://api.spotify.com/"+API_VERSION
 
 '''
     Helper
