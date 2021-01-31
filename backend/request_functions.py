@@ -75,12 +75,12 @@ def get_recommendations(auth_header, mode, artist_list, genre_list, track_list):
     auth_header = auth_header
     genre_string = ','.join(genre_list)
     track_list = ','.join(track_list)
-
+    energy = (int(mode[0])/4.0)
     artist_url = urlencode({'seed_artists': artist_list})
     genre_url = urlencode({'seed_genres': genre_string})
     track_url = urlencode({'seed_tracks': track_list})
     tempo_url = urlencode({'target_tempo': mode[1]}) #update this at some point to incorporate mode
-    energy_url = urlencode({'target_energy': (mode[0]/4.0)})
+    energy_url = urlencode({'target_energy': energy})
     limit_url = urlencode(REC_LIMIT)
     query = '&'.join([limit_url, artist_url, genre_url, track_url, tempo_url,energy_url])
     url = ''.join([SPOTIFY_API_URL, REC_URL_FRAG, query])
