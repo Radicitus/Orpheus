@@ -11,8 +11,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="../static/styles.css">
-    <link rel="script" href="../static/scripts.js">
-
+{#    <link rel="script" href="../static/scripts.js">#}
+    <script type="text/javascript" src="../static/scripts.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -41,13 +41,13 @@
 
         <div id="bpm_selector">
             <span>BPM:</span>
-            <button class="circle" id="bpm_minus">-</button>
-            <span id="bpm_val">420</span>
-            <button class="circle" id="bpm_plus">+</button>
+            <button type="button" onClick="onClickDecBPM()" class="circle" id="bpm_minus">-</button>
+            <span id="bpm_val">152</span>
+            <button type="button" onClick="onClickIncBPM()" class="circle" id="bpm_plus">+</button>
         </div>
 
         <button class="submit">Let's go!</button>
     </form>
-
+    <script type="text/javascript" src="../static/scripts.js"></script>
 </body>
 </html>
