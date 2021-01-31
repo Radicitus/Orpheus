@@ -1,5 +1,6 @@
 import json
 import os
+import time
 
 from flask import Flask, render_template, request, redirect, session, url_for
 from flask_cors import CORS
@@ -42,6 +43,7 @@ def playlist_creation():
     pump_level = session['selections']['pumped']
     bpm = session['selections']['bpm']
     complete_playlist_data = request_functions.get_complete_playlist(session['auth_header'], [pump_level, bpm])
+    time.sleep(5)
     return render_template('final.html', playlist_data=complete_playlist_data)
 
 @app.errorhandler(HTTPException)
