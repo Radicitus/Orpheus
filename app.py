@@ -60,7 +60,7 @@ def create_playlist():
     print('createPlaylist')
     playlist_data = request_functions.create_playlist(session['auth_header'], session['user_data']['id'])
     session['playlist_data'] = playlist_data.json()
-    return "heh"
+    return str(playlist_data.json())
 
 @app.route('/addToPlaylist/', methods=['POST', 'GET'])
 def add_to_playlist():
@@ -77,6 +77,11 @@ def get_user():
     return render_template('get_user_test.html', user=user_data)
 
 
+@app.route('/complete/<mode>')
+def complete_playlist(mode):
+    complete_playlist_data = request_functions.get_complete_playlist(session['auth_header'], mode)
+    print(complete_playlist_data)
+    return render_template('complete_test.html')
 
 
 if __name__ == '__main__':
