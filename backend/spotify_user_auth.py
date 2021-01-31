@@ -27,7 +27,7 @@ CLIENT_SECRET = CLIENT['secret']
 CLIENT_SIDE_URL = "http://127.0.0.1"
 PORT = 5000
 REDIRECT_URI = "{}:{}/callback/".format(CLIENT_SIDE_URL, PORT)
-SCOPE = "playlist-modify-public playlist-modify-private user-read-recently-played user-top-read"
+SCOPE = "playlist-modify-public playlist-modify-private user-read-recently-played user-top-read user-read-private"
 STATE = ""
 SHOW_DIALOG_bool = True
 SHOW_DIALOG_str = str(SHOW_DIALOG_bool).lower()
@@ -47,7 +47,7 @@ URL_ARGS = "&".join(["{}={}".format(key, urllibparse.quote(val))
 AUTH_URL = "{}/?{}".format(SPOTIFY_AUTH_URL, URL_ARGS)
 
 
-def authorize(auth_token):
+def authorize(auth_token, scopes=[]):
     code_payload = {
         "grant_type": "authorization_code",
         "code": str(auth_token),
@@ -58,7 +58,7 @@ def authorize(auth_token):
     headers = {"Authorization": "Basic {}".format(base64encoded.decode())}
 
     post_request = requests.post(SPOTIFY_TOKEN_URL, data=code_payload, headers=headers)
-
+    print(post_request.json())
     # Return tokens to backend
     response_data = json.loads(post_request.text)
     access_token = response_data["access_token"]
