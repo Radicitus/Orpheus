@@ -21,14 +21,17 @@ def auth():
 def callback():
     auth_token = request.args['code']
     session['user_auth'] = auth_token
-
     return redirect(url_for('index'))
 
 
-@app.route('/top_artist')
-def top_artists():
-    auth = request_functions.get_top_artist(session['auth header'])
-    print(auth)
+
+
+
+
+@app.route('/recs/')
+def hardcode_get_recs():
+    recs_data = request_functions.get_recommendations(session['user_auth'], ['classical', 'jazz','funk'])
+    return render_template('rec_list_test.html', recs=recs_data['tracks'])
 
 if __name__ == '__main__':
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
