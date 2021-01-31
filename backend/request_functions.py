@@ -21,7 +21,7 @@ REC_URL_FRAG = "recommendations?"
 TARGET_TEMPO = {'target_tempo': 152}
 
 USER_READ_PRIVATE = "user-read-private"
-
+PLAYLIST_MODIFY_PUBLIC = "playlist-modify-public"
 
 '''
 
@@ -58,16 +58,33 @@ def get_user_info(auth_token):
     auth_header = spotify_user_auth.authorize(auth_token, [USER_READ_PRIVATE])
 
     url = ''.join([SPOTIFY_API_URL, 'me'])
+    print(url)
     response = requests.get(url, headers=auth_header)
     print(response.json())
     return response.json()
 
+
 '''
     POST - Create Playlist
 '''
-def create_rec_playlist(auth_token, rec_json):
-    auth_header = spotify_user_auth.authorize(auth_token, [USER_READ_PRIVATE])
+def create_playlist(auth_token, user_id):
+    auth_header = spotify_user_auth.authorize(auth_token, [PLAYLIST_MODIFY_PUBLIC])
+    body = {
+        "name": "very cool music i promise",
+        "description": "read the title",
+        "public": True
+        }
+    url = ''.join([SPOTIFY_API_URL,'users/',user_id,'/playlists'])
+    print(url)
+    response = requests.get(url, headers=auth_header)
+    return response.json()
 
+
+'''
+    POST - Add Recommendations to Playlist
+'''
+def add_to_playlist(auth_token, rec_list, playlist_id):
+    auth_header = spotify_user_auth.authorize(auth_token, [PLAYLIST_MODIFY_PUBLIC])
 
 
 
