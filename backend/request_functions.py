@@ -28,7 +28,7 @@ def get_personalized_data(auth_header, option):
 '''
 
 def get_top_tracks_id(auth_header):
-    track_id_data = get_personalized_data(auth_header, mode, 'tracks')['items']
+    track_id_data = get_personalized_data(auth_header, 'tracks')['items']
     all_track_id = []
     for i in track_id_data:
         all_track_id.append(i['id'])
@@ -40,7 +40,7 @@ def get_top_tracks_id(auth_header):
 '''
 
 def get_top_artist_id_and_genres(auth_header):
-    artist_id_data = get_personalized_data(auth_header, mode, 'artists')
+    artist_id_data = get_personalized_data(auth_header, 'artists')
     all_artist_id = []
     all_genres = []
     for i in artist_id_data['items']:
