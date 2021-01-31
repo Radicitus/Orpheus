@@ -90,13 +90,6 @@ def get_recommendations(auth_header, mode, artist_list, genre_list, track_list):
     return response.json()
 
 '''
-    Handle everything
-'''
-
-def handle_everything():
-    pass
-
-'''
     GET - Get User Information
 '''
 def get_user_info(auth_header):
@@ -148,17 +141,10 @@ def add_to_playlist(auth_header, rec_list, playlist_id):
 
 
 '''
-    
+    This calls many of the methods above.
 '''
-
-
 def get_complete_playlist(auth_header, mode):
-    '''
 
-    :param auth_header:
-    :param mode:
-    :return:
-    '''
     #Retrieve the user's top artists, genres, and tracks
     artist_and_genre = get_top_artist_id_and_genres(auth_header, mode)
     artist_list = artist_and_genre[0]
@@ -179,7 +165,3 @@ def get_complete_playlist(auth_header, mode):
 
 
     return playlist_data.json()
-
-
-def build_playlist():
-    return None
