@@ -16,17 +16,25 @@ SPOTIFY_TOKEN_URL = SPOTIFY_AUTH_BASE_URL.format('api/token')
 '''
     Common Parameters
 '''
-REC_LIMIT = {'limit': 30 }
+REC_LIMIT = {'limit': 30}
 
 '''
     Get Recommendations
 '''
+
 def get_recommendations(auth_token, genre_list):
     auth_header = spotify_user_auth.authorize(auth_token)
     genre_string = ','.join(genre_list)
     genre_param = quote(genre_string)
-    limit = urlencode(REC_LIMIT)
-    url = SPOTIFY_API_URL + "recommendations?"+limit+genre_param
+    rec_url = "recommendations?"
+    artist_url = urlencode({'seed_artists': '7ENzCHnmJUr20nUjoZ0zZ1'})
+    genre_url = urlencode({'seed_genres': genre_param})
+    track_url = urlencode({'seed_tracks': '0rFHElzeddB9ymDjgpBENX'})
+    limit_url = urlencode(REC_LIMIT)
+    query = '&'.join([limit_url,artist_url,genre_url,track_url])
+    url = ''.join([SPOTIFY_API_URL,rec_url,query])
+    print(url)
+    print(auth_header)
     response = requests.get(url, headers=auth_header)
     print(response.json())
     return response.json()
