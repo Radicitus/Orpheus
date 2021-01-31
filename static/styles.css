@@ -47,11 +47,6 @@ div p {
     margin: 2vmin 0;
 }
 
-/*form#selection_form div#bpm_selector button#bpm_minus {*/
-/*    color:red;*/
-/*    width: 100%;*/
-/*}*/
-
 .btn-check:checked+.btn-secondary {
     background-color: white;
     color: black;
