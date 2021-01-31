@@ -17,7 +17,7 @@ SPOTIFY_API_URL = "https://api.spotify.com/"+API_VERSION
     Helper
 '''
 
-def get_personalized_data(auth_header, mode, option):
+def get_personalized_data(auth_header, option):
     # auth_header = spotify_user_auth.authorize(auth_header)
     url = ''.join([SPOTIFY_API_URL,f'me/top/{option}/'])
     response = requests.get(url, headers=auth_header)
@@ -27,7 +27,7 @@ def get_personalized_data(auth_header, mode, option):
     Get top Tracks - 2 tracks
 '''
 
-def get_top_tracks_id(auth_header,mode):
+def get_top_tracks_id(auth_header):
     track_id_data = get_personalized_data(auth_header, mode, 'tracks')['items']
     all_track_id = []
     for i in track_id_data:
@@ -39,7 +39,7 @@ def get_top_tracks_id(auth_header,mode):
     Get top Artists - just one
 '''
 
-def get_top_artist_id_and_genres(auth_header,mode):
+def get_top_artist_id_and_genres(auth_header):
     artist_id_data = get_personalized_data(auth_header, mode, 'artists')
     all_artist_id = []
     all_genres = []
@@ -56,7 +56,7 @@ def get_top_artist_id_and_genres(auth_header,mode):
     Get Top Genres - 2 genres (This is commented out to save API calls)
 '''
 
-# def get_top_genres(auth_header,mode):
+# def get_top_genres(auth_header):
 #     genre_data = get_personalized_data(auth_header, mode, 'artists')
 #     all_genres = []
 #     for i in genre_data['items']:
@@ -79,9 +79,10 @@ def get_recommendations(auth_header, mode, artist_list, genre_list, track_list):
     artist_url = urlencode({'seed_artists': artist_list})
     genre_url = urlencode({'seed_genres': genre_string})
     track_url = urlencode({'seed_tracks': track_list})
-    tempo_url = urlencode(TARGET_TEMPO) #update this at some point to incorporate mode
+    tempo_url = urlencode({'target_tempo': mode[1]}) #update this at some point to incorporate mode
+    energy_url = urlencode({'target_energy': mode[0]})
     limit_url = urlencode(REC_LIMIT)
-    query = '&'.join([limit_url, artist_url, genre_url, track_url, tempo_url])
+    query = '&'.join([limit_url, artist_url, genre_url, track_url, tempo_url,energy_url])
     url = ''.join([SPOTIFY_API_URL, REC_URL_FRAG, query])
     print(url)
     print(auth_header)
@@ -146,10 +147,10 @@ def add_to_playlist(auth_header, rec_list, playlist_id):
 def get_complete_playlist(auth_header, mode):
 
     #Retrieve the user's top artists, genres, and tracks
-    artist_and_genre = get_top_artist_id_and_genres(auth_header, mode)
+    artist_and_genre = get_top_artist_id_and_genres(auth_header)
     artist_list = artist_and_genre[0]
     genre_list = artist_and_genre[1]
-    track_list = get_top_tracks_id(auth_header, mode)
+    track_list = get_top_tracks_id(auth_header)
 
     #Get recommended songs based on the above lists
     rec_data = get_recommendations(auth_header, mode, artist_list, genre_list, track_list)
