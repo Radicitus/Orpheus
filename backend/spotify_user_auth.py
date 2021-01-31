@@ -47,12 +47,14 @@ URL_ARGS = "&".join(["{}={}".format(key, urllibparse.quote(val))
 AUTH_URL = "{}/?{}".format(SPOTIFY_AUTH_URL, URL_ARGS)
 
 
-def authorize(auth_token):
+def authorize(auth_token, scopes=[]):
     code_payload = {
         "grant_type": "authorization_code",
         "code": str(auth_token),
         "redirect_uri": REDIRECT_URI
     }
+    if scopes != []:
+        code_payload['scope'] = urllibparse.urlencode(scopes)
 
     base64encoded = base64.b64encode(("{}:{}".format(CLIENT_ID, CLIENT_SECRET)).encode())
     headers = {"Authorization": "Basic {}".format(base64encoded.decode())}
