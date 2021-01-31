@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, session, url_for
 import json
 import os
 from backend import spotify_user_auth
+from backend import request_functions
 
 app = Flask(__name__)
 
@@ -24,6 +25,11 @@ def callback():
 
     return redirect(url_for('index'))
 
+
+@app.route('/top_artist')
+def top_artists():
+    auth = request_functions.get_top_artist(session['auth header'])
+    print(auth)
 
 if __name__ == '__main__':
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
