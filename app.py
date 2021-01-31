@@ -19,7 +19,6 @@ def auth():
 @app.route('/callback/')
 def callback():
     auth_token = request.args['code']
-    auth_header = spotify_user_auth.authorize(auth_token)
     session['user_auth'] = auth_token
 
     return redirect(url_for('index'))
