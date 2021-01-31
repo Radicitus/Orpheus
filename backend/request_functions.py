@@ -152,7 +152,7 @@ def add_to_playlist(auth_header, rec_list, playlist_id):
     url = ''.join([SPOTIFY_API_URL, 'playlists/', playlist_id, '/tracks'])
     response = requests.post(url, headers=auth_header, data=body)
     print('add_to_playlist: {}'.format(url))
-
+    print(response.json())
     return response
 
 
@@ -187,7 +187,7 @@ def get_complete_playlist(auth_header, mode):
     finished_playlist_data = add_to_playlist(auth_header, rec_data['tracks'], playlist_data.json()['id'])
 
 
-    return str(finished_playlist_data.json())
+    return str(playlist_data.json())
 
 
 def build_playlist():
