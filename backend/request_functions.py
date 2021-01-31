@@ -109,21 +109,35 @@ def get_user_info(auth_header):
 def create_playlist(auth_header, user_id):
     auth_header = auth_header
     body = json.dumps({
-        "name": "very cool music i promise",
+        "name": "very cool music i super promise",
         "description": "read the title",
         "public": True
         })
     url = ''.join([SPOTIFY_API_URL, 'users/', user_id, '/playlists'])
     print(url)
-    response = requests.get(url, headers=auth_header)
-    return response.json()
+    response = requests.post(url, headers=auth_header, data=body)
+    return response
 
 
 '''
     POST - Add Recommendations to Playlist
 '''
 def add_to_playlist(auth_header, rec_list, playlist_id):
-    auth_header = spotify_user_auth.authorize(auth_header)
+    auth_header = auth_header
+    uri_list = []
+    for rec in rec_list:
+        uri_list.append(rec['uri'])
+
+    body = json.dumps({
+        'uris': uri_list
+    })
+
+    url = ''.join([SPOTIFY_API_URL, 'playlists/', playlist_id, '/tracks'])
+    response = requests.post(url, headers=auth_header, data=body)
+    print('add_to_playlist: {}'.format(url))
+
+    return response
+
 
 
 
