@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, session, url_for
 import json
 import os
 from backend import spotify_user_auth
+from backend import request_functions
 
 app = Flask(__name__)
 
@@ -20,9 +21,17 @@ def auth():
 def callback():
     auth_token = request.args['code']
     session['user_auth'] = auth_token
-
     return redirect(url_for('index'))
 
+
+
+
+
+
+@app.route('/recs/')
+def hardcode_get_recs():
+    recs_data = request_functions.get_recommendations(session['user_auth'], ['classical', 'jazz','funk'])
+    return render_template('rec_list_test.html', recs=recs_data['tracks'])
 
 if __name__ == '__main__':
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
