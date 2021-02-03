@@ -17,7 +17,8 @@ SELF = "'self'"
 talisman = Talisman(
     app,
     content_security_policy={
-        'default-src': [SELF, '\'unsafe-inline\'', '*'],
+        'default-src': [SELF],
+        'style-src': ['*.fontawesome.com', '*.jsdelivr.net', '*.googleapis.com'],
     },
     content_security_policy_nonce_in=['script-src'],
     feature_policy={
