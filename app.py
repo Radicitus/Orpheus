@@ -12,11 +12,13 @@ app = Flask(__name__)
 CORS(app)
 ### Set app secret
 app.secret_key = os.environ['app_secret']
-### Set content security policy
-csp = {
-    'default-src': '*'
-}
-Talisman(app)
+### Set content security policy and enable Talisman
+talisman = Talisman(
+    app,
+    content_security_policy={
+        'default-src': '*'
+    }
+)
 
 
 @app.route('/')
