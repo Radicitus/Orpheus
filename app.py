@@ -1,18 +1,22 @@
-import json
 import os
-import time
 
 from flask import Flask, render_template, request, redirect, session, url_for
 from flask_cors import CORS
-from werkzeug.exceptions import HTTPException
+from flask_talisman import Talisman
 
 from backend import request_functions
 from backend import spotify_user_auth
 
+# App setup
 app = Flask(__name__)
 CORS(app)
-# Set app secret
+### Set app secret
 app.secret_key = os.environ['app_secret']
+### Set content security policy
+csp = {
+    'default-src': '*'
+}
+Talisman(app)
 
 
 @app.route('/')
@@ -45,7 +49,6 @@ def playlist_creation():
     pump_level = session['selections']['pumped']
     bpm = session['selections']['bpm']
     complete_playlist_data = request_functions.get_complete_playlist(session['auth_header'], [pump_level, bpm])
-    time.sleep(5)
     return render_template('final.html', playlist_data=complete_playlist_data)
 
 
