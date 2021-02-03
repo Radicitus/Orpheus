@@ -18,7 +18,8 @@ talisman = Talisman(
     app,
     content_security_policy={
         'default-src': [SELF],
-        'style-src': ['*.fontawesome.com', '*.jsdelivr.net', '*.googleapis.com'],
+        'style-src': [SELF, '*.fontawesome.com', '*.jsdelivr.net', '*.googleapis.com'],
+        'script-src': [SELF, '*.fontawesome.com', '*.jsdelivr.net', '*.googleapis.com'],
     },
     content_security_policy_nonce_in=['script-src'],
     feature_policy={
