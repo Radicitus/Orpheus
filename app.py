@@ -21,6 +21,10 @@ talisman = Talisman(
         'img-src': '*',
         'style-src': [SELF, 'cdn.jsdelivr.net', 'fonts.googleapis.com'],
         'script-src': [SELF, 'kit.fontawesome.com', 'cdn.jsdelivr.net'],
+    },
+    content_security_policy_nonce_in=['script-src'],
+    feature_policy={
+        'geolocation': '\'none\'',
     }
 )
 
