@@ -22,7 +22,7 @@ CLIENT_ID = os.environ['client_id']
 CLIENT_SECRET = os.environ['client_secret']
 
 ### Server parameters
-CLIENT_SIDE_URL = "https://ophs.herokuapp.com"
+CLIENT_SIDE_URL = os.environ['app_url']
 REDIRECT_URI = "{}/callback/".format(CLIENT_SIDE_URL)
 SCOPE = "playlist-modify-public playlist-modify-private user-read-recently-played user-top-read user-read-private"
 STATE = ""
