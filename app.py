@@ -16,7 +16,10 @@ app.secret_key = os.environ['app_secret']
 talisman = Talisman(
     app,
     content_security_policy={
-        'default-src': '*'
+        'default-src': '*',
+        'img-src': '*',
+        'style-src': '*',
+        'script-src': '*'
     }
 )
 
