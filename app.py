@@ -13,13 +13,14 @@ CORS(app)
 ### Set app secret
 app.secret_key = os.environ['app_secret']
 ### Set content security policy and enable Talisman
+SELF = "'self'"
 talisman = Talisman(
     app,
     content_security_policy={
-        'default-src': '*',
+        'default-src': [SELF, '*'],
         'img-src': '*',
-        'style-src': '*',
-        'script-src': '*'
+        'style-src': [SELF, 'cdn.jsdelivr.net', 'fonts.googleapis.com'],
+        'script-src': [SELF, 'kit.fontawesome.com', 'cdn.jsdelivr.net'],
     }
 )
 
