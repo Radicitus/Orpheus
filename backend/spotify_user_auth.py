@@ -4,7 +4,6 @@ import requests
 import urllib.parse as urllibparse
 import os
 
-os.chdir(os.path.dirname(os.path.abspath(__file__)))
 # ----- API Base Url -----
 
 SPOTIFY_API_BASE_URL = 'https://api.spotify.com'
@@ -19,14 +18,12 @@ SPOTIFY_AUTH_URL = SPOTIFY_AUTH_BASE_URL.format('authorize')
 SPOTIFY_TOKEN_URL = SPOTIFY_AUTH_BASE_URL.format('api/token')
 
 ### Client Keys
-CLIENT = json.load(open("../credentials/credentials.txt", 'r+'))
-CLIENT_ID = CLIENT['id']
-CLIENT_SECRET = CLIENT['secret']
+CLIENT_ID = os.environ['client_id']
+CLIENT_SECRET = os.environ['client_secret']
 
 ### Server parameters
-CLIENT_SIDE_URL = "http://127.0.0.1"
-PORT = 5000
-REDIRECT_URI = "{}:{}/callback/".format(CLIENT_SIDE_URL, PORT)
+CLIENT_SIDE_URL = "https://ophs.herokuapp.com"
+REDIRECT_URI = "{}/callback/".format(CLIENT_SIDE_URL)
 SCOPE = "playlist-modify-public playlist-modify-private user-read-recently-played user-top-read user-read-private"
 STATE = ""
 SHOW_DIALOG_bool = True

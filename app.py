@@ -11,6 +11,8 @@ from backend import spotify_user_auth
 
 app = Flask(__name__)
 CORS(app)
+# Set app secret
+app.secret_key = os.environ['app_secret']
 
 
 @app.route('/')
@@ -46,23 +48,6 @@ def playlist_creation():
     time.sleep(5)
     return render_template('final.html', playlist_data=complete_playlist_data)
 
-@app.errorhandler(HTTPException)
-def handle_exception(e):
-    """Return JSON instead of HTML for HTTP errors."""
-    # start with the correct headers and status code from the error
-    print(e)
-    response = e.get_response()
-    # replace the body with JSON
-    response.data = json.dumps({
-        "code": e.code,
-        "name": e.name,
-        "description": e.description,
-    })
-    response.content_type = "application/json"
-    return render_template("error.html", info=e)
 
 if __name__ == '__main__':
-    os.chdir(os.path.dirname(os.path.abspath(__file__)))
-    credentials = json.load(open("credentials/credentials.txt", 'r+'))
-    app.secret_key = credentials['app_secret']
     app.run()
