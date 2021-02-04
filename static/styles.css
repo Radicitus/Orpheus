@@ -131,27 +131,27 @@ div p {
     box-shadow: 0 0 2em 0 white;
 }
 
-i {
+#arrow-to-desc {
     color: #737373;
     margin: 1.5rem auto;
     font-size: 2rem;
 }
 
-#app-desc-container {
+#app-desc {
     height: fit-content;
     margin-top: 7%;
     text-align: center;
 }
 
-#app-desc-container h1 {
-    color: #04A6EC;
-}
-
-#app-desc-container div {
+.app-desc-container {
     width: 50%;
     margin: 2rem auto;
 }
 
-#app-desc-container h4 {
+.app-desc-container .app-desc-title {
+    color: #04A6EC;
+}
+
+.app-desc-container .app-desc-content {
     font-weight: lighter;
 }
