@@ -5,13 +5,14 @@ body {
     text-align: center;
     align-content: center;
     background-image: url("../static/src/Background Waves.svg");
-    background-position: center;
+    background-position: 50% 30vh;
+    background-size: contain;
     background-repeat: no-repeat;
 }
 
 
 #title {
-    font-size: 10vmax;
+    font-size: 10vw;
     width: 48vw;
     margin: 0 auto 0 auto;
     background: -webkit-linear-gradient(45deg, #00EEE0, #04A6EC);
@@ -128,4 +129,29 @@ div p {
     width: 21%;
     padding: 1.1vh;
     box-shadow: 0 0 2em 0 white;
+}
+
+#arrow-to-desc {
+    color: #737373;
+    margin: 1.5rem auto;
+    font-size: 2rem;
+}
+
+#app-desc {
+    height: fit-content;
+    margin-top: 7%;
+    text-align: center;
+}
+
+.app-desc-container {
+    width: 50%;
+    margin: 2rem auto;
+}
+
+.app-desc-container .app-desc-title {
+    color: #04A6EC;
+}
+
+.app-desc-container .app-desc-content {
+    font-weight: lighter;
 }

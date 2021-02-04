@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="../static/styles.css">
-    <link rel="script" href="../static/scripts.js">
+    <link rel="stylesheet" href="../static/fontawesome/css/all.css">
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -41,13 +41,34 @@
 
         <div id="bpm_selector">
             <span>BPM:</span>
-            <button type="button" class="circle btn btn-primary" id="bpm_minus" onclick="decreaseBPM()">-</button>
+            <script src="../static/scripts.js"></script>
+            <button type="button" class="circle btn btn-primary" id="bpm_minus">-</button>
             <input type="text" id="bpm" name="bpm" value="100" inputmode="numeric" pattern="[0-9]*"><label for="bpm"></label>
-            <button type="button" class="circle btn btn-primary" id="bpm_plus" onclick="increaseBPM()">+</button>
+            <button type="button" class="circle btn btn-primary" id="bpm_plus">+</button>
         </div>
 
         <button class="submit">Let's go!</button>
     </form>
+
+    <i id="arrow-to-desc" class="fas fa-arrow-down"></i>
+
+    <div id="app-desc">
+        <div class="app-desc-container">
+            <h1 class="app-desc-title">What is Orpheus?</h1>
+            <h4 class="app-desc-content">Orpheus is designed to take user input for the energy and pace,
+                or BPM, for a playlist they would like to create. The app then generates a playlist of songs meeting
+                this criteria from Spotify's recommended songs, which is based on a users' past listening experience.
+            </h4>
+        </div>
+        <div class="app-desc-container">
+            <h1 class="app-desc-title">Why should I use Orpheus?</h1>
+            <h4 class="app-desc-content">The best use case of Orpheus would be for creating different playlists of different energy and/or pace
+                for different activities or milestones. For example, no one likes getting a good rhythm to a song while
+                jogging, and then tripping over the beat when the next song is way slower or faster. This app aims to
+                fix that problem.
+            </h4>
+        </div>
+    </div>
 
     <script type="text/javascript" src="../static/scripts.js"></script>
 </body>
